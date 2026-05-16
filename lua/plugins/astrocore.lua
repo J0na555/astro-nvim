@@ -27,19 +27,20 @@ return {
     },
     -- vim options can be configured here
     options = {
-      opt = { -- vim.opt.<key>
-        relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- sets vim.opt.number
-        spell = false, -- sets vim.opt.spell
-        signcolumn = "auto", -- sets vim.opt.signcolumn to yes
-        wrap = false, -- sets vim.opt.wrap
-        conceallevel = 0, -- disable conceal
-        linebreak = true, -- linebreak soft wrap at words
-        list = true, -- show whitespace characters
-        guicursor = "n-v-i-c:block-Cursor",
-        showbreak = "󱞩 ",
-        listchars = { tab = "󰌒 ", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" },
-      },
+        opt = { -- vim.opt.<key>
+          relativenumber = true, -- sets vim.opt.relativenumber
+          number = true, -- sets vim.opt.number
+          spell = false, -- sets vim.opt.spell
+          signcolumn = "auto", -- sets vim.opt.signcolumn to yes
+          wrap = false, -- sets vim.opt.wrap
+          conceallevel = 0, -- disable conceal
+          linebreak = true, -- linebreak soft wrap at words
+          list = true, -- show whitespace characters
+          guicursor = "n-v-i-c:block-Cursor",
+          showbreak = "󱞩 ",
+          listchars = { tab = "󰌒 ", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" },
+          timeoutlen = 300, -- timeout for key sequences like jk
+        },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
@@ -62,9 +63,17 @@ return {
 
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    mappings = {
-      -- first key is the mode
-      n = {
+      mappings = {
+        -- first key is the mode
+        i = {
+          ["jk"] = {
+            function()
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end,
+            desc = "Exit insert mode",
+          },
+        },
+        n = {
         -- second key is the lefthand side of the map
 
         -- navigate buffer tabs

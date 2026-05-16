@@ -23,8 +23,23 @@ return {
       },
     },
     sources = {
+      default = { "lsp", "path", "snippets", "buffer", "cmdline" },
       providers = {
         path = { opts = { trailing_slash = false, show_hidden_files_by_default = true } },
+      },
+    },
+    cmdline = {
+      enabled = true,
+      keymap = {
+        ['<Tab>'] = { 'show', 'accept' },
+      },
+      completion = {
+        menu = {
+          auto_show = function(ctx)
+            return vim.fn.getcmdtype() == ':'
+          end,
+        },
+        list = { selection = { preselect = true, auto_insert = false } },
       },
     },
     signature = { enabled = true },
