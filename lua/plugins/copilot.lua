@@ -4,15 +4,7 @@ return {
     build = ":Copilot auth",
     event = "InsertEnter",
     dependencies = {
-      {
-        "Saghen/blink.cmp",
-        optional = true,
-        opts = {
-          sources = {
-            compat = { "copilot" },
-          },
-        },
-      },
+      { "Saghen/blink.cmp", optional = true },
     },
     opts = {
       suggestion = {
